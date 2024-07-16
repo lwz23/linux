@@ -10,3 +10,4 @@ All contributors to this effort are understood to have agreed to the Linux kerne
 
 <!-- XXX: Only for GitHub -- do not commit into mainline -->
 # tty0tty
+我是lwz，这是一个使用rust来重新编写tty0tty模块的测试。目前已经完成了tty0tty模块的编写与安全抽象，但是安全抽象部分还不是很完善，并且并没有添加///SAFETY注释，仅作为实验使用。
