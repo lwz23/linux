@@ -39,6 +39,8 @@
 #include <linux/uaccess.h>
 #include <linux/uio.h>
 #include <linux/fs_parser.h>
+#include <linux/tty_driver.h>
+#include <linux/sched.h>
 
 __noreturn void rust_helper_BUG(void)
 {
@@ -51,6 +53,21 @@ void rust_helper_clk_disable_unprepare(struct clk *clk)
 	return clk_disable_unprepare(clk);
 }
 EXPORT_SYMBOL_GPL(rust_helper_clk_disable_unprepare);
+
+//here is for tty0tty
+void rust_helper_tty_set_operations(struct tty_driver *driver,const struct tty_operations *op)
+{
+	return tty_set_operations(driver,op);
+}
+EXPORT_SYMBOL_GPL(rust_helper_tty_set_operations);
+
+
+void rust_helper_sema_init(struct semaphore *sem, int val)
+{
+	return sema_init(sem,val);
+}
+EXPORT_SYMBOL_GPL(rust_helper_sema_init);
+
 
 int rust_helper_clk_prepare_enable(struct clk *clk)
 {

@@ -71,16 +71,27 @@ EXPORT_SYMBOL_GPL(tty_port_default_client_ops);
 void tty_port_init(struct tty_port *port)
 {
 	memset(port, 0, sizeof(*port));
+	
 	tty_buffer_init(port);
+	
 	init_waitqueue_head(&port->open_wait);
+	
 	init_waitqueue_head(&port->delta_msr_wait);
+	
 	mutex_init(&port->mutex);
+	
 	mutex_init(&port->buf_mutex);
+	
 	spin_lock_init(&port->lock);
+	
 	port->close_delay = (50 * HZ) / 100;
+	
 	port->closing_wait = (3000 * HZ) / 100;
+	
 	port->client_ops = &tty_port_default_client_ops;
+	
 	kref_init(&port->kref);
+	printk("tty port init success");
 }
 EXPORT_SYMBOL(tty_port_init);
 

@@ -2,6 +2,9 @@
 
 //! Rust stack probing sample.
 
+pub mod unsafe_rust_tty0tty;
+pub mod spi_dummy;
+
 use kernel::prelude::*;
 
 module! {

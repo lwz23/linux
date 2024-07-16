@@ -38,6 +38,10 @@ compile_error!("Missing kernel configuration for conditional compilation");
 #[cfg(not(testlib))]
 mod allocator;
 
+
+//pub mod spi;
+
+
 #[doc(hidden)]
 pub use bindings;
 
@@ -61,6 +65,7 @@ pub mod irq;
 pub mod kasync;
 pub mod miscdev;
 pub mod mm;
+pub mod tty;
 #[cfg(CONFIG_NET)]
 pub mod net;
 pub mod pages;
@@ -145,6 +150,9 @@ pub struct ThisModule(*mut bindings::module);
 unsafe impl Sync for ThisModule {}
 
 impl ThisModule {
+    pub fn as_ptr(&self) -> *mut bindings::module {
+        self.0
+        }
     /// Creates a [`ThisModule`] given the `THIS_MODULE` pointer.
     ///
     /// # Safety

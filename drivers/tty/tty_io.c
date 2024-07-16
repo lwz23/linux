@@ -3424,6 +3424,7 @@ int tty_register_driver(struct tty_driver *driver)
 	dev_t dev;
 	struct device *d;
 
+	printk("-------start tty_io register--------");
 	if (!driver->major) {
 		error = alloc_chrdev_region(&dev, driver->minor_start,
 						driver->num, driver->name);
@@ -3435,8 +3436,10 @@ int tty_register_driver(struct tty_driver *driver)
 		dev = MKDEV(driver->major, driver->minor_start);
 		error = register_chrdev_region(dev, driver->num, driver->name);
 	}
-	if (error < 0)
+	if (error < 0){
 		goto err;
+	}
+		
 
 	if (driver->flags & TTY_DRIVER_DYNAMIC_ALLOC) {
 		error = tty_cdev_add(driver, dev, 0, driver->num);
@@ -3457,7 +3460,10 @@ int tty_register_driver(struct tty_driver *driver)
 			}
 		}
 	}
+
+	printk("-------we meet proc tty register driver--------");
 	proc_tty_register_driver(driver);
+	printk("-------we pass proc tty register driver--------");
 	driver->flags |= TTY_DRIVER_INSTALLED;
 	return 0;
 

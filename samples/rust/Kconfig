@@ -19,6 +19,40 @@ config SAMPLE_RUST_MINIMAL
 	  the module will be called rust_minimal.
 
 	  If unsure, say N.
+	  
+config SAMPLE_RUST_SPI
+	tristate "spi"
+	help
+	  This option builds the Rust minimal module sample.
+
+	  To compile this as a module, choose M here:
+	  the module will be called rust_minimal.
+
+	  If unsure, say N.
+	  
+config SAMPLE_UNSAFE_RUST_TTY
+	tristate "unsafe rust tty0tty module"
+	help
+	  This option builds the Rust tty0tty samples.
+
+	  If unsure, say N.
+	  
+config SAMPLE_RUST_TTY
+	tristate "rust tty0tty module"
+	help
+	  This option builds the Rust tty0tty samples.
+
+	  If unsure, say N.
+
+config SAMPLE_RUST_VDEV
+	tristate "Virtual Device"
+	help
+	  This option builds the Rust virtual device module sample.
+
+	  To compile this as a module, choose M here:
+	  the module will be called rust_vdev.
+
+	  If unsure, say N.
 
 config SAMPLE_RUST_PRINT
 	tristate "Printing macros"
@@ -94,6 +128,16 @@ config SAMPLE_RUST_SEMAPHORE_C
 	tristate "Semaphore (in C, for comparison)"
 	help
 	  This option builds the Rust semaphore sample (in C, for comparison).
+
+	  To compile this as a module, choose M here:
+	  the module will be called rust_semaphore_c.
+
+	  If unsure, say N.
+	  
+config SAMPLE_RUST_TTY0TTY_C
+	tristate "tty0tty (in C, for comparison)"
+	help
+	  This option builds the Rust tty0tty sample (in C, for comparison).
 
 	  To compile this as a module, choose M here:
 	  the module will be called rust_semaphore_c.

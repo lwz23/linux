@@ -15,5 +15,10 @@ obj-$(CONFIG_SAMPLE_RUST_NETFILTER)		+= rust_netfilter.o
 obj-$(CONFIG_SAMPLE_RUST_ECHO_SERVER)		+= rust_echo_server.o
 obj-$(CONFIG_SAMPLE_RUST_FS)			+= rust_fs.o
 obj-$(CONFIG_SAMPLE_RUST_SELFTESTS)		+= rust_selftests.o
+obj-$(CONFIG_SAMPLE_RUST_VDEV) 			+= rust_vdev.o
+obj-$(CONFIG_SAMPLE_UNSAFE_RUST_TTY)		+=unsafe_rust_tty0tty.o
+obj-$(CONFIG_SAMPLE_RUST_TTY)			+=rust_tty0tty.o
+obj-$(CONFIG_SAMPLE_RUST_TTY0TTY_C)		+=tty0tty.o
+obj-$(CONFIG_SAMPLE_RUST_SPI)		+=spi_dummy.o
 
 subdir-$(CONFIG_SAMPLE_RUST_HOSTPROGS)		+= hostprogs

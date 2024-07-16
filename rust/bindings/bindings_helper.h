@@ -37,7 +37,21 @@
 #include <linux/uio.h>
 #include <uapi/linux/android/binder.h>
 #include <linux/fs_parser.h>
+//for spi 
+#include <linux/spi/spi.h>
 
+
+//below is for tty0tty
+#include <linux/tty.h>
+#include <linux/tty_driver.h>
+#include <linux/tty_flip.h>
+#include <linux/termbits.h>
+#include <linux/serial.h>
+#include <linux/semaphore.h>
+#include <linux/sched.h>
+#include <asm/uaccess.h>
+#include <linux/compiler.h>
+//#include <linux/current.h>
 /* `bindgen` gets confused at certain things. */
 const gfp_t BINDINGS_GFP_KERNEL = GFP_KERNEL;
 const gfp_t BINDINGS___GFP_ZERO = __GFP_ZERO;

@@ -1234,6 +1234,14 @@ autoksyms_recursive: descend modules.order
 	  "$(MAKE) -f $(srctree)/Makefile autoksyms_recursive"
 endif
 
+PHONY += rustwatch
+rustwatch:
+	$(Q) cargo watch -w ./samples/rust/rust_vdev.rs -cs 'make && qemu-system-x86_64 -nographic -kernel vmlinux -initrd initrd.img -nic user,model=rtl8139,hostfwd=tcp::5555-:23'
+
+PHONY += rustvm
+rustvm:
+	$(Q) make && qemu-system-x86_64 -nographic -kernel vmlinux -initrd initrd.img #-nic user,model=rtl8139,hostfwd=tcp::5555-:23
+
 autoksyms_h := $(if $(CONFIG_TRIM_UNUSED_KSYMS), include/generated/autoksyms.h)
 
 quiet_cmd_autoksyms_h = GEN     $@
