@@ -39,7 +39,6 @@ compile_error!("Missing kernel configuration for conditional compilation");
 mod allocator;
 
 
-//pub mod spi;
 
 
 #[doc(hidden)]
