@@ -8,6 +8,7 @@ use bindings::ktermios;
 use bindings::semaphore;
 use core::marker::{PhantomData, PhantomPinned};
 use core::pin::Pin;
+use core::sync::atomic::{AtomicU32, Ordering};
 use macros::vtable;
 use core::ptr;
 use core::mem;
@@ -444,7 +445,7 @@ extern "C" fn tty0tty_ioctl_tiocmiwait(tty: *mut bindings::tty_struct,cmd:u32,ar
                 bindings::add_wait_queue( &mut (*tty0tty).wait as *mut bindings::wait_queue_head_t,&mut wait as *mut bindings::wait_queue_entry);
                 //set_current_state(TASK_INTERRUPTIBLE);
                 //smp_store_mb(get_current()->__state, (0x0001));
-
+                AtomicU32::from((*bindings::get_current()).__state).store(0x0001, Ordering::Release);
                 bindings::schedule();
                 bindings::remove_wait_queue( &mut (*tty0tty).wait as *mut bindings::wait_queue_head_t,&mut wait as *mut bindings::wait_queue_entry);
                 

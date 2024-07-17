@@ -184,7 +184,6 @@ impl Tty0ttyMethods for TTYMethods {
             return Ok(retval);
         }
         
-        //let index =unsafe {(*(*tty0tty).get_tty()).index};
         let tty0tty_serial = Tty0ttySerial::from_raw(tty0tty);
         let index = ( unsafe { core::ptr::read(tty0tty_serial.get_tty()) } ).index;
        if index%2==0{

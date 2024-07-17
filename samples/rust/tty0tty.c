@@ -75,7 +75,7 @@ MODULE_PARM_DESC(pairs,
 #define MSR_DSR		0x40
 #define MSR_RI		0x80
 
-static struct tty_port *tport;
+
 
 struct tty0tty_serial {
 	struct tty_struct *tty;	/* pointer to the tty for this device */
@@ -93,6 +93,7 @@ struct tty0tty_serial {
 
 };
 
+static struct tty_port *tport;
 static struct tty0tty_serial **tty0tty_table;	/* initially all NULL */
 
 static int tty0tty_open(struct tty_struct *tty, struct file *file)
