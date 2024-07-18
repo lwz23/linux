@@ -139,12 +139,18 @@ impl Tty0ttySerial {
 
 }
 
-// 安全的封装函数
 pub fn initialize_tty_semaphore(tty0tty: *mut Tty0ttySerial) {
+    assert!(!tty0tty.is_null(), "Pointer is null");
     unsafe {
         bindings::sema_init(&mut (*tty0tty).sem as *mut bindings::semaphore, 1);
     }
 }
+
+/*pub fn initialize_tty_semaphore(tty0tty: *mut Tty0ttySerial) {
+    unsafe {
+        bindings::sema_init(&mut (*tty0tty).sem as *mut bindings::semaphore, 1);
+    }
+}*/
 
 
 pub fn sema_up(tty0tty: *mut Tty0ttySerial){
@@ -159,6 +165,12 @@ pub fn sema_down(tty0tty: *mut Tty0ttySerial){
     }
 }
 
+pub fn safe_read(ptr: *mut bindings::tty_struct) ->bindings::tty_struct{
+    unsafe {
+        assert!(!ptr.is_null(), "Pointer is null");
+        ptr::read(ptr)
+    }
+}
 
 #[vtable]
 pub trait Tty0ttyMethods {
@@ -268,8 +280,16 @@ impl TtyStruct {
         unsafe { (*self.to_ptr()).termios.c_cflag = cflag; }
     }
 
-    pub fn get_c_iflag(&mut self) ->  u32 {
+    /*pub fn get_c_iflag(&mut self) ->  u32 {
         unsafe { (*self.to_ptr()).termios.c_iflag }
+    }*/
+
+    pub fn get_c_iflag(&mut self) -> Option<u32> {
+        if self.to_ptr().is_null() {
+            None
+        } else {
+            unsafe { Some((*self.to_ptr()).termios.c_iflag) }
+        }
     }
 
     pub fn set_c_iflag(&mut self, iflag:  u32) {

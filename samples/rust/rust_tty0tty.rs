@@ -44,8 +44,8 @@ const IGNPAR: u32 = 0o0000004;
 const PARMRK: u32 = 0o0000010;
 const INPCK: u32 = 0o0000020;
 
-fn relevant_iflag(iflag: u32) -> u32 {
-    iflag & (IGNBRK | BRKINT | IGNPAR | PARMRK | INPCK)
+fn relevant_iflag(iflag: Option<u32>) -> u32 {
+    iflag.unwrap() & (IGNBRK | BRKINT | IGNPAR | PARMRK | INPCK)
 }
 
 struct TTYMethods;
@@ -185,7 +185,7 @@ impl Tty0ttyMethods for TTYMethods {
         }
         
         let tty0tty_serial = Tty0ttySerial::from_raw(tty0tty);
-        let index = ( unsafe { core::ptr::read(tty0tty_serial.get_tty()) } ).index;
+        let index = ( safe_read(tty0tty_serial.get_tty())).index;
        if index%2==0{
         let table_entry: *mut Tty0ttySerial = unsafe { *TTY0TTY_TABLE.offset(index as isize + 1) };
         if !table_entry.is_null() {

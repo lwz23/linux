@@ -27,6 +27,13 @@ config SAMPLE_RUST_TTY
 	  This option builds the Rust tty0tty samples.
 
 	  If unsure, say N.
+	  
+config SAMPLE_RUST_UNSAFE_TTY
+	tristate "unsafe rust tty0tty module"
+	help
+	  This option builds the Rust tty0tty samples.
+
+	  If unsure, say N.
 
 config SAMPLE_RUST_VDEV
 	tristate "Virtual Device"
